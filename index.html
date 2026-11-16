@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J.A.R.V.I.S Command Center v4.0 — Neural AI for Windows</title>
+  <link href="https://googleapis.com" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03090e;
+      --card: #07131c;
+      --border: #112d3e;
+      --cyan: #00e5ff;
+      --teal: #00b8a9;
+      --green: #10b981;
+      --text: #e2f1f8;
+      --muted: #7a99ad;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, #082636 0%, #03090e 65%);
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 8%; border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;
+      background: rgba(3, 9, 14, 0.85);
+    }
+    .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--cyan); letter-spacing: 2px; }
+    .logo span { color: var(--text); font-size: 0.75rem; display: block; letter-spacing: 3px; font-weight: 500; }
+    .nav-btn {
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      color: #02080d; padding: 10px 22px; border-radius: 6px; font-weight: 700;
+      text-decoration: none; font-size: 0.9rem; transition: 0.3s;
+    }
+    .nav-btn:hover { box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); transform: translateY(-2px); }
+
+    .hero {
+      text-align: center; padding: 80px 8% 60px; max-width: 1100px; margin: auto;
+    }
+    .badge {
+      display: inline-block; padding: 6px 16px; border: 1px solid var(--cyan);
+      border-radius: 50px; color: var(--cyan); font-size: 0.8rem; font-weight: 600;
+      background: rgba(0, 229, 255, 0.08); margin-bottom: 24px; letter-spacing: 1px;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.15; margin-bottom: 20px;
+      background: linear-gradient(to right, #ffffff, #00e5ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 700px; margin: 0 auto 36px; line-height: 1.6; }
+
+    .orb-wrap {
+      position: relative; width: 210px; height: 210px; margin: 0 auto 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ring1, .ring2, .ring3 {
+      position: absolute; border-radius: 50%; border: 2px solid transparent;
+    }
+    .ring1 { width: 210px; height: 210px; border-top-color: var(--cyan); border-bottom-color: var(--teal); animation: spin 6s linear infinite; }
+    .ring2 { width: 175px; height: 175px; border-left-color: var(--cyan); border-right-color: var(--green); animation: spinRev 4s linear infinite; }
+    .ring3 { width: 140px; height: 140px; border: 1px dashed rgba(0, 229, 255, 0.4); }
+    .core-txt { font-family: 'Orbitron', sans-serif; font-weight: 700; letter-spacing: 3px; color: var(--text); text-align: center; }
+    .core-txt small { display: block; color: var(--cyan); font-size: 0.65rem; margin-top: 4px; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes spinRev { 100% { transform: rotate(-360deg); } }
+
+    .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      color: #02080d; padding: 16px 34px; border-radius: 8px; font-weight: 700;
+      text-decoration: none; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); transition: 0.3s;
+    }
+    .btn-primary:hover { transform: scale(1.04); box-shadow: 0 0 40px rgba(0, 229, 255, 0.6); }
+    .btn-sec {
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s;
+    }
+    .btn-sec:hover { border-color: var(--cyan); }
+
+    .section { padding: 70px 8%; max-width: 1200px; margin: auto; }
+    .sec-title { font-family: 'Orbitron', sans-serif; text-align: center; font-size: 1.9rem; margin-bottom: 12px; }
+    .sec-sub { text-align: center; color: var(--muted); margin-bottom: 48px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; transition: 0.3s; position: relative; overflow: hidden;
+    }
+    .card:hover { border-color: var(--cyan); transform: translateY(-5px); }
+    .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: var(--cyan); margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+
+    .steps {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 36px; margin-top: 30px;
+    }
+    .step-item { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+    .step-num {
+      background: rgba(0, 229, 255, 0.15); color: var(--cyan); border: 1px solid var(--cyan);
+      width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-weight: 700; flex-shrink: 0;
+    }
+
+    footer {
+      text-align: center; padding: 36px 8%; border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.85rem; margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">J.A.R.V.I.S <span>NEURAL COMMAND CENTER</span></div>
+    <a href="https://github.com" class="nav-btn">⬇ Download v4.0</a>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">● WINDOWS 10 / 11 NEURAL AI DESKTOP ASSISTANT</div>
+    <h1>Next-Gen Autonomous AI Command Center</h1>
+    <p>Control your entire Windows PC with natural voice, biometric face recognition, autonomous coding, live screen vision, and a floating holographic HUD.</p>
+
+    <div class="orb-wrap">
+      <div class="ring1"></div>
+      <div class="ring2"></div>
+      <div class="ring3"></div>
+      <div class="core-txt">JARVIS<small>AI CORE v4.0</small></div>
+    </div>
+
+    <div class="cta-group" id="download">
+      <a href="https://github.com" class="btn-primary">⬇ Download for Windows (.exe)</a>
+      <a href="#features" class="btn-sec">Explore Capabilities</a>
+    </div>
+    <p style="font-size: 0.8rem; margin-top: 14px; color: #567385;">Free Desktop Edition · Windows 10/11 (64-bit) · 100% Local Privacy</p>
+  </section>
+
+  <section class="section" id="features">
+    <h2 class="sec-title">ENGINEERED FOR TOTAL CONTROL</h2>
+    <p class="sec-sub">Built with real-time neural voice, computer vision, and multi-agent automation.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🎙 Real-Time Dual-Voice AI</h3>
+        <p>Talk naturally in English or Urdu/Hindi. Switch instantly between classic JARVIS male voice and warm female companion voices.</p>
+      </div>
+      <div class="card">
+        <h3>🛡 Biometric Face & PIN Lock</h3>
+        <p>Secures your command center with live OpenCV webcam facial recognition, 4-digit PIN gate, and intruder photo capture.</p>
+      </div>
+      <div class="card">
+        <h3>💻 Autonomous Coding Agent</h3>
+        <p>Ask JARVIS to write Python scripts, calculators, or web apps—it creates the file on your Desktop and executes it automatically.</p>
+      </div>
+      <div class="card">
+        <h3>👁 Live Screen Vision</h3>
+        <p>One-click screen analysis inspects your active window, helps debug code, and answers questions about anything on your monitor.</p>
+      </div>
+      <div class="card">
+        <h3>🌐 Floating Voice Orb & Notch</h3>
+        <p>Switch to Focus Mode to minimize the dashboard into an always-on-top voice-reactive floating orb and dynamic desktop notch.</p>
+      </div>
+      <div class="card">
+        <h3>📄 PDF Reader & System Power</h3>
+        <p>Summarize PDF/Word documents, clean Recycle Bin, control YouTube/volume, and shut down or lock your PC hands-free.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 20px;">QUICK START GUIDE</h3>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div><strong>Download & Launch:</strong> Run <code>JARVIS_Command_Center.exe</code> on your Windows 10/11 PC (No Python installation required).</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div><strong>Unlock Security Gate:</strong> Scan your face via webcam or enter the default PIN <code>1234</code> (customizable in Settings).</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div><strong>Connect Free Gemini API Key:</strong> Enter your free Google AI Studio key on first launch and start commanding JARVIS.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    J.A.R.V.I.S Command Center v4.0 · Crafted & Operated by <strong>Liger</strong> · All Rights Reserved.
+  </footer>
+
+</body>
+</html>
