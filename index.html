@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#03090e" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/jarvisicon_small.png" />
+  <link rel="icon" type="image/png" href="/jarvisicon_small.png" />
   <title>J.A.R.V.I.S Command Center v4.0 — Windows, Android & iPhone</title>
   <link href="https://googleapis.com" rel="stylesheet">
   <style>
@@ -74,13 +78,13 @@
       background: linear-gradient(135deg, var(--cyan), var(--teal));
       color: #02080d; padding: 15px 26px; border-radius: 8px; font-weight: 700;
       text-decoration: none; font-size: 0.98rem; display: inline-flex; align-items: center; gap: 8px;
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); transition: 0.3s;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); cursor: pointer; border: none; transition: 0.3s;
     }
     .btn-primary:hover { transform: scale(1.03); }
     .btn-os {
       background: #081e2c; border: 1px solid var(--cyan); color: var(--cyan);
       padding: 15px 24px; border-radius: 8px; font-weight: 700; font-size: 0.98rem;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s;
     }
     .btn-os:hover { background: rgba(0, 229, 255, 0.15); transform: scale(1.03); }
 
@@ -126,11 +130,11 @@
   <section class="hero">
     <div class="os-badges">
       <span class="os-pill">🪟 Windows 10/11 (.exe)</span>
-      <span class="os-pill">🤖 Android (.apk)</span>
-      <span class="os-pill">🍎 iPhone / iOS</span>
+      <span class="os-pill">🤖 Android App</span>
+      <span class="os-pill">🍎 iPhone / iOS App</span>
     </div>
     <h1>Autonomous AI Command Center</h1>
-    <p>Download J.A.R.V.I.S directly for your device. Full Autonomous Browser Control & Biometric Face Lock on Windows, plus dedicated installable editions for Android and iPhone.</p>
+    <p>Install J.A.R.V.I.S on every device. Download the full Desktop Edition for Windows with Autonomous Browser Control & Face Lock, or install the native mobile app on Android and iPhone.</p>
 
     <div class="orb-wrap">
       <div class="ring1"></div>
@@ -141,12 +145,13 @@
 
     <div class="cta-group">
       <a href="https://github.com" download="JARVIS_Command_Center.exe" class="btn-primary">🪟 Download Windows (.exe)</a>
-      <a href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v4.0/JARVIS_Android.apk" download="JARVIS_Android.apk" class="btn-os">🤖 Download Android (.apk)</a>
-      <a href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v4.0/JARVIS_iOS_Installer.mobileconfig" download="JARVIS_iOS_Installer.mobileconfig" class="btn-os">🍎 Download iPhone (iOS)</a>
+      <button onclick="installMobileApp()" class="btn-os">🤖 Install Android App</button>
+      <a href="https://github.com" download="JARVIS_iOS_Installer.mobileconfig" class="btn-os">🍎 Install iPhone (iOS)</a>
     </div>
-    <p style="font-size: 0.8rem; margin-top: 14px; color: #567385;">Operated by Liger · iPhone Users: After downloading, open Settings > Profile Downloaded > Install</p>
+    <p id="install-hint" style="font-size: 0.82rem; margin-top: 14px; color: #7a99ad;">Operated by Liger · Zero Server Errors · Works on Windows, Android & iPhone</p>
   </section>
 
+  <!-- Mobile AI Core Modal -->
   <div id="webapp-modal">
     <div class="app-shell">
       <div class="app-top">
@@ -174,7 +179,3 @@
     <div class="grid">
       <div class="card">
         <h3>🌐 Autonomous Browser Agent</h3>
-        <p>Controls your browser automatically—searches Google, clicks links, fills forms, scrolls pages, and summarizes live websites.</p>
-      </div>
-      <div class="card">
-        <h3>📱 Android & iPhone Installers</h3>
