@@ -9,7 +9,7 @@
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/jarvisicon_small.png" />
   <link rel="icon" type="image/png" href="/jarvisicon_small.png" />
-  <title>J.A.R.V.I.S Command Center v4.0 — Windows, Android & iPhone</title>
+  <title>J.A.R.V.I.S Command Center v5.0 — Windows, Android & iPhone</title>
   <link href="https://googleapis.com" rel="stylesheet">
   <style>
     :root {
@@ -34,20 +34,18 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 18px 6%; border-bottom: 1px solid var(--border);
       backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;
-      background: rgba(3, 9, 14, 0.88);
+      background: rgba(3, 9, 14, 0.9);
     }
     .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; color: var(--cyan); letter-spacing: 2px; }
     .logo span { color: var(--text); font-size: 0.7rem; display: block; letter-spacing: 2px; font-weight: 500; }
     .nav-btn {
       background: linear-gradient(135deg, var(--cyan), var(--teal));
-      color: #02080d; padding: 9px 18px; border-radius: 6px; font-weight: 700;
+      color: #02080d; padding: 10px 18px; border-radius: 6px; font-weight: 700;
       text-decoration: none; font-size: 0.85rem; cursor: pointer; border: none;
     }
 
     .hero { text-align: center; padding: 65px 6% 50px; max-width: 1100px; margin: auto; }
-    .os-badges {
-      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px;
-    }
+    .os-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
     .os-pill {
       padding: 5px 14px; border: 1px solid var(--border); border-radius: 50px;
       font-size: 0.78rem; font-weight: 600; color: var(--cyan); background: rgba(0, 229, 255, 0.06);
@@ -77,24 +75,30 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--cyan), var(--teal));
       color: #02080d; padding: 15px 26px; border-radius: 8px; font-weight: 700;
-      text-decoration: none; font-size: 0.98rem; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.98rem; display: inline-flex; align-items: center; gap: 8px;
       box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); cursor: pointer; border: none; transition: 0.3s;
     }
     .btn-primary:hover { transform: scale(1.03); }
     .btn-os {
       background: #081e2c; border: 1px solid var(--cyan); color: var(--cyan);
       padding: 15px 24px; border-radius: 8px; font-weight: 700; font-size: 0.98rem;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s;
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s;
     }
     .btn-os:hover { background: rgba(0, 229, 255, 0.15); transform: scale(1.03); }
 
-    #webapp-modal {
-      display: none; position: fixed; inset: 0; background: rgba(2, 6, 10, 0.96);
+    #dl-toast {
+      display: none; margin: 18px auto 0; max-width: 580px; padding: 13px 18px;
+      background: rgba(16, 185, 129, 0.15); border: 1px solid var(--green);
+      border-radius: 8px; color: #a7f3d0; font-size: 0.9rem; font-weight: 600;
+    }
+
+    .modal-bg {
+      display: none; position: fixed; inset: 0; background: rgba(2, 6, 10, 0.95);
       z-index: 999; padding: 16px; overflow-y: auto;
     }
     .app-shell {
-      max-width: 680px; margin: 10px auto; background: var(--card);
-      border: 1px solid var(--cyan); border-radius: 14px; padding: 20px;
+      max-width: 680px; margin: 20px auto; background: var(--card);
+      border: 1px solid var(--cyan); border-radius: 14px; padding: 22px;
     }
     .app-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
     .chat-box {
@@ -123,39 +127,43 @@
 <body>
 
   <nav>
-    <div class="logo">J.A.R.V.I.S <span>WINDOWS · ANDROID · iOS</span></div>
+    <div class="logo">J.A.R.V.I.S <span>COMMAND CENTER v5.0</span></div>
     <button onclick="openWebApp()" class="nav-btn">🎙 Launch Mobile AI</button>
   </nav>
 
   <section class="hero">
     <div class="os-badges">
       <span class="os-pill">🪟 Windows 10/11 (.exe)</span>
-      <span class="os-pill">🤖 Android App</span>
-      <span class="os-pill">🍎 iPhone / iOS App</span>
+      <span class="os-pill">🤖 Android (.apk)</span>
+      <span class="os-pill">🍎 iPhone / iOS</span>
     </div>
     <h1>Autonomous AI Command Center</h1>
-    <p>Install J.A.R.V.I.S on every device. Download the full Desktop Edition for Windows with Autonomous Browser Control & Face Lock, or install the native mobile app on Android and iPhone.</p>
+    <p>Download and install J.A.R.V.I.S v5.0 directly on Windows, Android, or iPhone without leaving this page. Includes Live Optical Camera HUD, Biometric Face Lock, and Autonomous Browser Agent.</p>
 
     <div class="orb-wrap">
       <div class="ring1"></div>
       <div class="ring2"></div>
       <div class="ring3"></div>
-      <div class="core-txt">JARVIS<small>AI CORE v4.0</small></div>
+      <div class="core-txt">JARVIS<small>AI CORE v5.0</small></div>
     </div>
 
     <div class="cta-group">
-      <a href="https://github.com" download="JARVIS_Command_Center.exe" class="btn-primary">🪟 Download Windows (.exe)</a>
-      <button onclick="installMobileApp()" class="btn-os">🤖 Install Android App</button>
-      <a href="https://github.com" download="JARVIS_iOS_Installer.mobileconfig" class="btn-os">🍎 Install iPhone (iOS)</a>
+      <button onclick="directDownload('exe')" class="btn-primary">🪟 Download Windows (.exe)</button>
+      <button onclick="directDownload('apk')" class="btn-os">🤖 Download Android (.apk)</button>
+      <button onclick="directDownload('ios')" class="btn-os">🍎 Download iPhone (iOS)</button>
     </div>
-    <p id="install-hint" style="font-size: 0.82rem; margin-top: 14px; color: #7a99ad;">Operated by Liger · Zero Server Errors · Works on Windows, Android & iPhone</p>
+
+    <div id="dl-toast"></div>
+    <iframe id="hidden-dl-frame" style="display:none;"></iframe>
+
+    <p style="font-size: 0.82rem; margin-top: 14px; color: #7a99ad;">Operated by Liger · Stay-On-Page Direct Installer · Windows, Android & iPhone</p>
   </section>
 
   <!-- Mobile AI Core Modal -->
-  <div id="webapp-modal">
+  <div id="webapp-modal" class="modal-bg">
     <div class="app-shell">
       <div class="app-top">
-        <div style="font-family:'Orbitron',sans-serif; color:var(--cyan); font-weight:700;">J.A.R.V.I.S // MOBILE CORE</div>
+        <div style="font-family:'Orbitron',sans-serif; color:var(--cyan); font-weight:700;">J.A.R.V.I.S // MOBILE CORE v5.0</div>
         <button onclick="closeWebApp()" style="background:#ef4444; color:#fff; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; font-weight:700;">✕ Close</button>
       </div>
       <div style="margin-bottom:10px; display:flex; gap:8px; flex-wrap:wrap;">
@@ -163,7 +171,7 @@
         <button onclick="saveKey()" class="nav-btn">Save Key</button>
       </div>
       <div class="chat-box" id="chat-box">
-        <div class="msg-ai"><strong>JARVIS:</strong> Mobile Neural Core Online. Enter your free Gemini API key above and speak or type your command.</div>
+        <div class="msg-ai"><strong>JARVIS:</strong> Mobile Neural Core v5.0 Online. Enter your free Gemini API key above and speak or type your command.</div>
       </div>
       <div class="input-row">
         <input id="cmd-input" type="text" placeholder="Ask JARVIS anything..." onkeydown="if(event.key==='Enter') sendMsg()" />
@@ -174,8 +182,8 @@
   </div>
 
   <section class="section">
-    <h2 class="sec-title">ENGINEERED FOR EVERY DEVICE</h2>
-    <p class="sec-sub">Autonomous browser automation, biometric security, and cross-platform voice AI.</p>
+    <h2 class="sec-title">WHAT'S NEW IN VERSION 5.0</h2>
+    <p class="sec-sub">Upgraded Tactical HUD, Live Optical Sensor, and Autonomous Web Control.</p>
     <div class="grid">
       <div class="card">
-        <h3>🌐 Autonomous Browser Agent</h3>
+        <h3>📷 Live Optical Camera HUD</h3>
