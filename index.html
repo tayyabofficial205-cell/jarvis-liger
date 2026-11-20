@@ -3,233 +3,378 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#03090e" />
+  <meta name="theme-color" content="#03060a" />
   <link rel="icon" type="image/png" href="/jarvisicon_small.png" />
-  <title>J.A.R.V.I.S Command Center v6.0 — Operated by Liger</title>
+  <title>J.A.R.V.I.S AI — Autonomous Character Inside Your System (v6.0)</title>
   <link href="https://googleapis.com" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #03090e;
-      color: #e2f1f8;
-      font-family: 'Inter', sans-serif;
-      text-align: center;
-      overflow-x: hidden;
-      background-image: radial-gradient(circle at 50% 0%, #092c3e 0%, #03090e 70%);
+    :root {
+      --bg: #03060a;
+      --surface: rgba(12, 18, 26, 0.72);
+      --border: rgba(255, 255, 255, 0.09);
+      --cyan: #38bdf8;
+      --glow: #00e5ff;
+      --emerald: #10b981;
+      --text: #f8fafc;
+      --muted: #94a3b8;
     }
-    .v7-banner {
-      background: linear-gradient(90deg, #04131d, #0d3b52, #04131d);
-      border-bottom: 2px solid #00e5ff;
-      padding: 18px 16px;
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Fullscreen Live Animated Particle & Starfield Canvas */
+    #neural-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Glowing Top Announcement Strip */
+    .v7-strip {
+      position: relative;
+      z-index: 20;
+      background: linear-gradient(90deg, rgba(3,12,20,0.95), rgba(14,58,82,0.95), rgba(3,12,20,0.95));
+      border-bottom: 1px solid rgba(56, 189, 248, 0.4);
+      text-align: center;
+      padding: 10px 16px;
       font-family: 'Orbitron', sans-serif;
+      font-size: clamp(0.75rem, 1.8vw, 0.95rem);
       font-weight: 900;
-      font-size: clamp(1rem, 2.8vw, 1.55rem);
       letter-spacing: 2px;
       color: #ffffff;
-      text-shadow: 0 0 12px #00e5ff, 0 0 28px #00e5ff, 0 0 45px #10b981;
-      animation: glowPulse 1.8s infinite alternate;
+      text-shadow: 0 0 12px #00e5ff, 0 0 26px #00e5ff;
+      animation: stripGlow 2s infinite alternate;
     }
-    @keyframes glowPulse {
-      from {
-        box-shadow: 0 0 15px rgba(0, 229, 255, 0.35);
-        text-shadow: 0 0 10px #00e5ff, 0 0 24px #00e5ff;
-      }
-      to {
-        box-shadow: 0 0 32px rgba(16, 185, 129, 0.7);
-        text-shadow: 0 0 18px #ffffff, 0 0 36px #00e5ff, 0 0 58px #10b981;
-      }
+    @keyframes stripGlow {
+      from { text-shadow: 0 0 8px #00e5ff, 0 0 18px #38bdf8; }
+      to   { text-shadow: 0 0 16px #ffffff, 0 0 32px #00e5ff, 0 0 48px #10b981; }
     }
-    nav {
+
+    /* Stonic-Style Floating Glass Pill Navbar */
+    .nav-wrap {
+      position: sticky;
+      top: 16px;
+      z-index: 30;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 6%;
-      border-bottom: 1px solid #112d3e;
+      justify-content: center;
+      padding: 0 16px;
     }
-    .logo {
+    .pill-nav {
+      width: 100%;
+      max-width: 1080px;
+      background: rgba(15, 20, 28, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 999px;
+      padding: 10px 14px 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      color: #00e5ff;
-      font-size: 1.25rem;
-      letter-spacing: 2px;
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      color: #fff;
+      text-decoration: none;
     }
-    .hero {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 64px 20px 44px;
-    }
-    .pill {
-      display: inline-block;
-      padding: 6px 18px;
-      border-radius: 50px;
-      border: 1px solid #00e5ff;
-      background: rgba(0, 229, 255, 0.08);
-      color: #00e5ff;
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2.1rem, 5vw, 3.7rem);
-      line-height: 1.15;
-      background: linear-gradient(to right, #ffffff, #00e5ff, #10b981);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 18px;
-    }
-    p {
-      color: #8aa6b8;
-      font-size: 1.08rem;
-      max-width: 710px;
-      margin: 0 auto 36px;
-      line-height: 1.65;
-    }
-    .orb {
-      width: 170px;
-      height: 170px;
-      margin: 0 auto 36px;
+    .brand-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      border: 3px solid #00e5ff;
-      box-shadow: 0 0 35px rgba(0, 229, 255, 0.45), inset 0 0 25px rgba(16, 185, 129, 0.35);
+      background: var(--glow);
+      box-shadow: 0 0 12px var(--glow);
+    }
+    .nav-links {
       display: flex;
-      flex-direction: column;
+      gap: 26px;
+    }
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: #ffffff; }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-tag {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .btn-pill-white {
+      background: #ffffff;
+      color: #03060a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+    .btn-pill-white:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.45);
+    }
+
+    /* Cinematic Hero Section */
+    .hero {
+      position: relative;
+      z-index: 10;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 46px 20px 80px;
+      text-align: center;
+    }
+
+    /* Ethereal AI Hologram Core (Stonic-Inspired Volumetric Silhouette + Orb) */
+    .entity-stage {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 24px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: 1.25rem;
-      letter-spacing: 3px;
+    }
+    .aura-back {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.36) 0%, rgba(56, 189, 248, 0.12) 45%, transparent 72%);
+      filter: blur(22px);
+      animation: breathe 4s ease-in-out infinite alternate;
+    }
+    @keyframes breathe {
+      from { transform: scale(0.92); opacity: 0.75; }
+      to   { transform: scale(1.12); opacity: 1; }
+    }
+    .entity-svg {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      filter: drop-shadow(0 0 24px rgba(0, 229, 255, 0.65));
+      animation: floatEntity 5s ease-in-out infinite;
+    }
+    @keyframes floatEntity {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 5.4vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.12;
+      max-width: 860px;
+      margin: 0 auto 18px;
       color: #ffffff;
     }
-    .orb small {
-      font-size: 0.68rem;
-      color: #00e5ff;
-      margin-top: 4px;
-      letter-spacing: 2px;
+    .hero h1 span {
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #00e5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .btn-dl {
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      max-width: 620px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-dark-pill {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 15px 30px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+    .btn-dark-pill:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .btn-light-pill {
+      background: #ffffff;
+      color: #03060a;
+      border: none;
+      padding: 15px 32px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, #00e5ff, #10b981);
-      color: #02080d;
-      padding: 17px 36px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 1.08rem;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 32px rgba(0, 229, 255, 0.5);
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.35);
       transition: 0.25s;
     }
-    .btn-dl:hover {
-      transform: scale(1.04);
+    .btn-light-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.65);
     }
-    #dl-status {
+
+    #dl-toast {
       display: none;
-      margin: 18px auto 0;
-      max-width: 560px;
-      padding: 12px 18px;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid #10b981;
-      border-radius: 8px;
+      margin: 22px auto 0;
+      max-width: 540px;
+      padding: 13px 20px;
+      border-radius: 14px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.5);
       color: #a7f3d0;
-      font-weight: 600;
       font-size: 0.92rem;
+      font-weight: 600;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 20px;
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-      text-align: left;
+
+    /* Section Containers */
+    section.block {
+      position: relative;
+      z-index: 10;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 70px 20px;
     }
-    .card {
-      background: #07141f;
-      border: 1px solid #13354a;
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .card h3 {
-      font-family: 'Orbitron', sans-serif;
-      color: #00e5ff;
-      font-size: 1rem;
+    .sec-label {
+      text-align: center;
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
       margin-bottom: 10px;
     }
-    .card p {
-      font-size: 0.92rem;
-      margin: 0;
+    .sec-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 3.8vw, 2.7rem);
+      font-weight: 800;
+      margin-bottom: 14px;
     }
-    footer {
-      padding: 30px;
-      border-top: 1px solid #112d3e;
-      color: #6e8fa3;
-      font-size: 0.85rem;
-      margin-top: 50px;
+    .sec-desc {
+      text-align: center;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 48px;
     }
-  </style>
-</head>
-<body>
 
-  <div class="v7-banner">
-    🚀 VERSION 7.0 COMING SOON — WITH MORE AMAZING AUTONOMOUS AI FEATURES! 🚀
-  </div>
-
-  <nav>
-    <div class="logo">J.A.R.V.I.S v6.0</div>
-    <div style="color:#10b981; font-weight:700; font-size:0.85rem;">● OPERATED BY LIGER</div>
-  </nav>
-
-  <section class="hero">
-    <div class="pill">🪟 WINDOWS 10 / 11 · COMMAND CENTER EDITION v6.0</div>
-    <h1>Autonomous AI Command Center</h1>
-    <p>Control your PC with natural voice commands in English, Urdu, and Hindi. Features Biometric Face ID Unlock, Live Optical Vision, Autonomous Browser Control, and Real-Time System Telemetry.</p>
-
-    <div class="orb">
-      JARVIS
-      <small>CORE v6.0</small>
-    </div>
-
-    <button onclick="startDirectDownload()" class="btn-dl">
-      ⬇ Download J.A.R.V.I.S v6.0 for Windows (.exe)
-    </button>
-
-    <div id="dl-status">✅ Downloading <strong>JARVIS_Command_Center_v6.exe</strong> directly to your PC! Check your browser downloads.</div>
-  </section>
-
-  <div class="grid">
-    <div class="card">
-      <h3>🛡 Biometric Face ID & Security</h3>
-      <p>Instant webcam facial recognition gate with live optical monitoring and intruder alert protection.</p>
-    </div>
-    <div class="card">
-      <h3>🌐 Autonomous Browser & Coding</h3>
-      <p>Searches Google, opens websites, writes Python applications automatically, and manages system tasks hands-free.</p>
-    </div>
-    <div class="card">
-      <h3>🎙 Bilingual Voice & Live Telemetry</h3>
-      <p>Understands English, Urdu, and Hindi while tracking live CPU, RAM, Disk, Weather, and Market feeds.</p>
-    </div>
-  </div>
-
-  <footer>
-    J.A.R.V.I.S Command Center v6.0 · Crafted & Operated by <strong>Liger</strong> · Version 7.0 Coming Soon
-  </footer>
-
-  <script>
-    function startDirectDownload() {
-      document.getElementById('dl-status').style.display = 'block';
-      const a = document.createElement('a');
-      a.href = "https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v4.0/JARVIS_Command_Center_v6.exe";
-      a.download = "JARVIS_Command_Center_v6.exe";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+    /* Interactive Live Command Simulator Box */
+    .sim-box {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 860px;
+      margin: 0 auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
     }
-  </script>
+    .sim-chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .chip {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #7dd3fc;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .chip:hover {
+      background: rgba(56, 189, 248, 0.22);
+      color: #fff;
+    }
+    .sim-screen {
+      background: #04080e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+      font-family: monospace;
+      font-size: 0.94rem;
+      min-height: 120px;
+      color: #e2e8f0;
+    }
 
-</body>
-</html>
+    /* Bento Feature Cards */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+    .b-card {
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      transition: 0.3s;
+    }
+    .b-card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      transform: translateY(-4px);
+    }
+    .b-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+    }
+    .b-card h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .b-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* System Specs & Roadmap Banner */
+    .roadmap-card {
+      background: linear-gradient(135deg, rgba(14, 42, 64, 0.7), rgba(8, 16, 26, 0.9));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 26px;
+      padding: 44px 32px;
