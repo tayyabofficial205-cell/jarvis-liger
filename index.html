@@ -3,574 +3,231 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>J.A.R.V.I.S Command Center v5.0 - Free Autonomous AI for Windows</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#03090e" />
+  <link rel="icon" type="image/png" href="/jarvisicon_small.png" />
+  <title>J.A.R.V.I.S Command Center v6.0 — Operated by Liger</title>
+  <link href="https://googleapis.com" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: #03080d;
-      color: #e6f4fa;
-      font-family: 'Inter', Arial, sans-serif;
-      line-height: 1.6;
-      background-image: radial-gradient(circle at 50% 0%, #0a2a3d 0%, #03080d 65%);
+      background: #03090e;
+      color: #e2f1f8;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, #092c3e 0%, #03090e 70%);
     }
-    a { text-decoration: none; }
-    
-    /* Navbar */
-    .navbar {
+    .v7-banner {
+      background: linear-gradient(90deg, #04131d, #0d3b52, #04131d);
+      border-bottom: 2px solid #00e5ff;
+      padding: 18px 16px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1rem, 2.8vw, 1.55rem);
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-shadow: 0 0 12px #00e5ff, 0 0 28px #00e5ff, 0 0 45px #10b981;
+      animation: glowPulse 1.8s infinite alternate;
+    }
+    @keyframes glowPulse {
+      from {
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.35);
+        text-shadow: 0 0 10px #00e5ff, 0 0 24px #00e5ff;
+      }
+      to {
+        box-shadow: 0 0 32px rgba(16, 185, 129, 0.7);
+        text-shadow: 0 0 18px #ffffff, 0 0 36px #00e5ff, 0 0 58px #10b981;
+      }
+    }
+    nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 7%;
-      background: rgba(3, 8, 13, 0.92);
-      border-bottom: 1px solid #122d42;
-      position: sticky;
-      top: 0;
-      z-index: 999;
+      padding: 18px 6%;
+      border-bottom: 1px solid #112d3e;
     }
-    .brand {
+    .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
       font-weight: 900;
       color: #00e5ff;
+      font-size: 1.25rem;
       letter-spacing: 2px;
     }
-    .brand small {
-      display: block;
-      font-size: 11px;
-      color: #e6f4fa;
-      letter-spacing: 3px;
-      font-weight: 400;
-    }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-links a { color: #8ab0c7; font-size: 14px; font-weight: 600; }
-    .nav-links a:hover { color: #00e5ff; }
-    .btn-cyan {
-      background: linear-gradient(135deg, #00e5ff, #00b8a9);
-      color: #02080d !important;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-weight: 800;
-      display: inline-block;
-    }
-    .btn-cyan:hover { opacity: 0.9; }
-
-    /* Hero */
     .hero {
-      text-align: center;
-      padding: 80px 7% 60px;
-      max-width: 1150px;
-      margin: auto;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 20px 44px;
     }
-    .tag {
+    .pill {
       display: inline-block;
-      padding: 6px 16px;
-      border: 1px solid #00e5ff;
+      padding: 6px 18px;
       border-radius: 50px;
-      color: #00e5ff;
-      font-size: 12px;
-      font-weight: 700;
+      border: 1px solid #00e5ff;
       background: rgba(0, 229, 255, 0.08);
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    }
-    .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 46px;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      color: #ffffff;
-    }
-    .hero p {
-      color: #8ab0c7;
-      font-size: 18px;
-      max-width: 720px;
-      margin: 0 auto 35px;
-    }
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-    .btn-large {
-      background: linear-gradient(135deg, #00e5ff, #00b8a9);
-      color: #02080d;
-      padding: 16px 36px;
-      border-radius: 10px;
-      font-size: 17px;
-      font-weight: 800;
-      box-shadow: 0 0 30px rgba(0, 229, 255, 0.35);
-    }
-    .btn-dark {
-      background: #07131c;
-      border: 1px solid #163850;
-      color: #e6f4fa;
-      padding: 16px 30px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-    }
-    .sub-note { font-size: 13px; color: #10b981; font-weight: 600; }
-
-    /* Live App Mockup */
-    .mockup {
-      max-width: 1100px;
-      margin: 50px auto 0;
-      background: #050f17;
-      border: 1px solid #163850;
-      border-radius: 16px;
-      overflow: hidden;
-      text-align: left;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-    }
-    .mockup-bar {
-      background: #03090e;
-      padding: 12px 20px;
-      border-bottom: 1px solid #122d42;
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: #8ab0c7;
-    }
-    .mockup-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr 1fr;
-      gap: 18px;
-      padding: 22px;
-    }
-    .panel {
-      background: #081621;
-      border: 1px solid #122d42;
-      border-radius: 12px;
-      padding: 18px;
-    }
-    .panel-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
       color: #00e5ff;
-      margin-bottom: 14px;
-      letter-spacing: 1px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 20px;
     }
-    .item-box {
-      background: #0b1e2d;
-      border: 1px solid #163850;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      font-size: 13px;
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.1rem, 5vw, 3.7rem);
+      line-height: 1.15;
+      background: linear-gradient(to right, #ffffff, #00e5ff, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 18px;
     }
-    .item-box strong { display: block; color: #fff; margin-bottom: 2px; }
-    .item-box span { color: #8ab0c7; font-size: 12px; }
-
-    /* Core Orb */
-    .orb-center { text-align: center; padding: 15px; }
-    .orb-circle {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 18px;
+    p {
+      color: #8aa6b8;
+      font-size: 1.08rem;
+      max-width: 710px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+    .orb {
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 36px;
       border-radius: 50%;
       border: 3px solid #00e5ff;
-      box-shadow: 0 0 30px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.45), inset 0 0 25px rgba(16, 185, 129, 0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: pulseOrb 3s infinite;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: 3px;
+      color: #ffffff;
     }
-    @keyframes pulseOrb {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+    .orb small {
+      font-size: 0.68rem;
+      color: #00e5ff;
+      margin-top: 4px;
+      letter-spacing: 2px;
     }
-    .orb-circle b { font-family: 'Orbitron', sans-serif; font-size: 18px; color: #fff; letter-spacing: 2px; }
-    .orb-circle small { color: #00e5ff; font-size: 11px; }
-    .mode-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
-    .mode-btn {
-      background: #0b1e2d;
-      border: 1px solid #163850;
-      color: #e6f4fa;
-      padding: 9px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
+    .btn-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #00e5ff, #10b981);
+      color: #02080d;
+      padding: 17px 36px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1.08rem;
+      border: none;
       cursor: pointer;
+      box-shadow: 0 0 32px rgba(0, 229, 255, 0.5);
+      transition: 0.25s;
     }
-    .mode-btn:hover, .mode-btn.active { border-color: #00e5ff; background: #102c42; color: #00e5ff; }
-
-    /* Sections */
-    .section { padding: 75px 7%; max-width: 1180px; margin: auto; }
-    .sec-head { text-align: center; margin-bottom: 45px; }
-    .sec-head small { font-family: 'Orbitron', sans-serif; color: #00e5ff; font-size: 12px; letter-spacing: 2px; }
-    .sec-head h2 { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #fff; margin: 8px 0 12px; }
-    .sec-head p { color: #8ab0c7; max-width: 650px; margin: auto; }
-
-    .cards-grid {
+    .btn-dl:hover {
+      transform: scale(1.04);
+    }
+    #dl-status {
+      display: none;
+      margin: 18px auto 0;
+      max-width: 560px;
+      padding: 12px 18px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      color: #a7f3d0;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: left;
     }
     .card {
-      background: #07131c;
-      border: 1px solid #122d42;
-      border-radius: 14px;
-      padding: 26px;
+      background: #07141f;
+      border: 1px solid #13354a;
+      border-radius: 12px;
+      padding: 24px;
     }
-    .card:hover { border-color: #00e5ff; }
-    .card h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #00e5ff; margin-bottom: 10px; }
-    .card p { color: #8ab0c7; font-size: 14px; }
-
-    /* Push To Talk Section */
-    .ptt-card {
-      background: #07131c;
-      border: 1px solid #122d42;
-      border-radius: 16px;
-      padding: 36px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
+    .card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00e5ff;
+      font-size: 1rem;
+      margin-bottom: 10px;
     }
-    .kbd { background: #03080d; border: 1px solid #163850; padding: 16px; border-radius: 10px; }
-    .k-row { display: flex; gap: 6px; margin-bottom: 6px; }
-    .k {
-      flex: 1; background: #0c1f2e; border: 1px solid #1b415c; color: #8ab0c7;
-      text-align: center; padding: 10px 0; border-radius: 5px; font-size: 12px; font-weight: 700;
+    .card p {
+      font-size: 0.92rem;
+      margin: 0;
     }
-    .k.hot {
-      background: rgba(0, 229, 255, 0.2); border-color: #00e5ff; color: #00e5ff; cursor: pointer;
-    }
-    .ptt-out {
-      margin-top: 12px; padding: 10px; background: #0b1e2d; border-radius: 6px;
-      font-size: 13px; color: #00e5ff; text-align: center; border: 1px dashed #00e5ff;
-    }
-
-    /* Free Edition Box */
-    .free-box {
-      max-width: 760px;
-      margin: auto;
-      background: #071520;
-      border: 2px solid #00e5ff;
-      border-radius: 18px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(0, 229, 255, 0.15);
-    }
-    .free-price { font-family: 'Orbitron', sans-serif; font-size: 48px; font-weight: 900; color: #fff; margin: 10px 0; }
-    .free-price span { font-size: 16px; color: #8ab0c7; font-weight: 400; }
-    .list-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      text-align: left;
-      margin: 28px 0 34px;
-      font-size: 14px;
-    }
-    .list-2col div { color: #e6f4fa; }
-    .list-2col b { color: #10b981; margin-right: 6px; }
-
-    /* FAQ */
-    .faq-box { max-width: 800px; margin: auto; }
-    .faq { background: #07131c; border: 1px solid #122d42; border-radius: 10px; margin-bottom: 12px; }
-    .faq-q {
-      width: 100%; background: none; border: none; color: #fff; padding: 18px 22px;
-      text-align: left; font-size: 16px; font-weight: 700; cursor: pointer;
-      display: flex; justify-content: space-between;
-    }
-    .faq-a { padding: 0 22px 18px; color: #8ab0c7; font-size: 14px; display: none; }
-    .faq.open .faq-a { display: block; }
-
-    /* Footer */
-    .footer {
-      background: #020508;
-      border-top: 1px solid #122d42;
-      padding: 50px 7% 30px;
+    footer {
+      padding: 30px;
+      border-top: 1px solid #112d3e;
+      color: #6e8fa3;
+      font-size: 0.85rem;
       margin-top: 50px;
-    }
-    .foot-cols {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 30px;
-      max-width: 1180px;
-      margin: 0 auto 30px;
-    }
-    .foot-cols h4 { font-family: 'Orbitron', sans-serif; font-size: 14px; color: #fff; margin-bottom: 14px; }
-    .foot-cols a { display: block; color: #8ab0c7; font-size: 13px; margin-bottom: 8px; }
-    .foot-cols a:hover { color: #00e5ff; }
-    .foot-end {
-      max-width: 1180px; margin: auto; padding-top: 20px; border-top: 1px solid #122d42;
-      display: flex; justify-content: space-between; font-size: 13px; color: #8ab0c7; flex-wrap: wrap;
-    }
-
-    @media (max-width: 850px) {
-      .mockup-grid, .ptt-card, .foot-cols, .list-2col { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 30px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar">
-    <a href="#" class="brand">J.A.R.V.I.S <small>COMMAND CENTER v5.0</small></a>
-    <div class="nav-links">
-      <a href="#core">The Core</a>
-      <a href="#ptt">Push-to-Talk</a>
-      <a href="#features">Capabilities</a>
-      <a href="#free">Free Edition</a>
-      <a href="#faq">FAQ</a>
-      <a href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v5.0/JARVIS_Command_Center.exe" download class="btn-cyan">Download v5.0</a>
+  <div class="v7-banner">
+    🚀 VERSION 7.0 COMING SOON — WITH MORE AMAZING AUTONOMOUS AI FEATURES! 🚀
+  </div>
+
+  <nav>
+    <div class="logo">J.A.R.V.I.S v6.0</div>
+    <div style="color:#10b981; font-weight:700; font-size:0.85rem;">● OPERATED BY LIGER</div>
+  </nav>
+
+  <section class="hero">
+    <div class="pill">🪟 WINDOWS 10 / 11 · COMMAND CENTER EDITION v6.0</div>
+    <h1>Autonomous AI Command Center</h1>
+    <p>Control your PC with natural voice commands in English, Urdu, and Hindi. Features Biometric Face ID Unlock, Live Optical Vision, Autonomous Browser Control, and Real-Time System Telemetry.</p>
+
+    <div class="orb">
+      JARVIS
+      <small>CORE v6.0</small>
+    </div>
+
+    <button onclick="startDirectDownload()" class="btn-dl">
+      ⬇ Download J.A.R.V.I.S v6.0 for Windows (.exe)
+    </button>
+
+    <div id="dl-status">✅ Downloading <strong>JARVIS_Command_Center_v6.exe</strong> directly to your PC! Check your browser downloads.</div>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🛡 Biometric Face ID & Security</h3>
+      <p>Instant webcam facial recognition gate with live optical monitoring and intruder alert protection.</p>
+    </div>
+    <div class="card">
+      <h3>🌐 Autonomous Browser & Coding</h3>
+      <p>Searches Google, opens websites, writes Python applications automatically, and manages system tasks hands-free.</p>
+    </div>
+    <div class="card">
+      <h3>🎙 Bilingual Voice & Live Telemetry</h3>
+      <p>Understands English, Urdu, and Hindi while tracking live CPU, RAM, Disk, Weather, and Market feeds.</p>
     </div>
   </div>
 
-  <div class="hero">
-    <div class="tag">WINDOWS 10 / 11 - 100% FREE LIFETIME EDITION (v5.0)</div>
-    <h1>An intelligent AI character that lives inside your PC.</h1>
-    <p>Talk naturally in English, Urdu, or Hindi. Control your Windows desktop with voice, biometric face recognition, autonomous coding agents, and live screen vision.</p>
-    
-    <div class="hero-btns">
-      <a href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v5.0/JARVIS_Command_Center.exe" download class="btn-large">Download v5.0 for Windows (.exe)</a>
-      <a href="#free" class="btn-dark">See Everything Included (Free)</a>
-    </div>
-    <div class="sub-note">No Paid Plans - No Monthly Fees - 100% Free Forever</div>
-
-    <div class="mockup">
-      <div class="mockup-bar">
-        <span>J.A.R.V.I.S NEURAL COMMAND CENTER v5.0</span>
-        <span style="color:#10b981;">SYSTEM OPTIMAL</span>
-      </div>
-      <div class="mockup-grid">
-        <div class="panel">
-          <div class="panel-title">YOUR WORLD - DAILY BRIEF</div>
-          <div class="item-box">
-            <strong>1. Autonomous Workspace</strong>
-            <span>Ready to generate & run Python/Web code on Desktop.</span>
-          </div>
-          <div class="item-box">
-            <strong>2. Biometric Security Gate</strong>
-            <span>OpenCV Face Lock & 4-Digit PIN active.</span>
-          </div>
-          <div class="item-box">
-            <strong>3. Dual Neural Voice</strong>
-            <span>Switch between Male (UK) & Female voices.</span>
-          </div>
-        </div>
-
-        <div class="panel orb-center">
-          <div class="orb-circle">
-            <b>JARVIS</b>
-            <small id="orb-label">CORE v5.0</small>
-          </div>
-          <p id="orb-info" style="font-size:13px; color:#8ab0c7;">Click a circuit below to inspect system modules:</p>
-          <div class="mode-btns">
-            <button class="mode-btn active" onclick="setMode('memory', this)">Memory Core</button>
-            <button class="mode-btn" onclick="setMode('coding', this)">Auto-Coding</button>
-            <button class="mode-btn" onclick="setMode('vision', this)">Screen Vision</button>
-            <button class="mode-btn" onclick="setMode('lock', this)">Face & PIN Lock</button>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-title">LIVE INTELLIGENCE FEED</div>
-          <div class="item-box" style="border-left: 3px solid #10b981;">
-            <strong>You:</strong>
-            <span>"Jarvis, create a calculator app on my Desktop and run it."</span>
-          </div>
-          <div class="item-box" style="border-left: 3px solid #00e5ff;">
-            <strong>JARVIS:</strong>
-            <span>"Creating calculator.py on your Desktop and launching it now."</span>
-          </div>
-          <div class="item-box" style="border-left: 3px solid #00e5ff;">
-            <strong>Status:</strong>
-            <span>v5.0 Focus Mode Floating Orb ready.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="core">
-    <div class="sec-head">
-      <small>NEURAL ARCHITECTURE</small>
-      <h2>Meet the mind you talk to.</h2>
-      <p>Four intelligent circuits work together to give you total hands-free control over your Windows workstation.</p>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card">
-        <h3>01. Long-Term Memory</h3>
-        <p>Remembers your name, preferences, and ongoing tasks so conversations feel personal and continuous.</p>
-      </div>
-      <div class="card">
-        <h3>02. Autonomous Coding</h3>
-        <p>Ask JARVIS to build Python scripts or web apps—it writes the code directly to your Desktop and runs it automatically.</p>
-      </div>
-      <div class="card">
-        <h3>03. Bilingual Dual-Voice</h3>
-        <p>Speak in English, Urdu, or Hindi. Switch instantly between classic JARVIS male voice and warm female companion voice.</p>
-      </div>
-      <div class="card">
-        <h3>04. Biometric Face Lock</h3>
-        <p>Secures your system with live OpenCV webcam facial recognition, 4-digit PIN gate, and intruder photo capture.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="ptt">
-    <div class="ptt-card">
-      <div>
-        <small style="font-family:'Orbitron',sans-serif; color:#00e5ff; font-size:12px;">INSTANT HOTKEY</small>
-        <h2 style="font-family:'Orbitron',sans-serif; font-size:28px; margin:8px 0 14px;">Hold one key. Talk from any app.</h2>
-        <p style="color:#8ab0c7; font-size:15px; margin-bottom:14px;">
-          Press and hold the glowing <strong>` (Tilde)</strong> key below Esc while gaming, coding, or browsing. Speak your command and release—JARVIS responds instantly.
-        </p>
-        <p style="color:#8ab0c7; font-size:14px;">
-          Activate <strong>Focus Mode</strong> to minimize the dashboard into an always-on-top floating voice orb and desktop notch.
-        </p>
-      </div>
-      <div class="kbd">
-        <div class="k-row"><div class="k">Esc</div><div class="k">F1</div><div class="k">F2</div><div class="k">F3</div><div class="k">F4</div></div>
-        <div class="k-row"><div class="k hot" onmousedown="pttOn()" onmouseup="pttOff()">` ~</div><div class="k">1</div><div class="k">2</div><div class="k">3</div><div class="k">4</div></div>
-        <div class="k-row"><div class="k">Tab</div><div class="k">Q</div><div class="k">W</div><div class="k">E</div><div class="k">R</div></div>
-        <div class="k-row"><div class="k">Caps</div><div class="k">A</div><div class="k">S</div><div class="k">D</div><div class="k">F</div></div>
-        <div class="ptt-out" id="ptt-text">Click & hold the glowing ` ~ key above to test Push-to-Talk</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="features">
-    <div class="sec-head">
-      <small>COMPLETE TOOLKIT</small>
-      <h2>Engineered for Total Control</h2>
-      <p>Every utility you need built directly into a sleek sci-fi desktop HUD.</p>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card">
-        <h3>Live Screen Vision</h3>
-        <p>One-click optical screen analysis inspects your active window, helps debug code, and answers questions about what is on your monitor.</p>
-      </div>
-      <div class="card">
-        <h3>PDF & Word Reader</h3>
-        <p>Summarize long PDF and Word documents in seconds and ask follow-up questions by voice.</p>
-      </div>
-      <div class="card">
-        <h3>Floating Orb & Notch</h3>
-        <p>Switch to Focus Mode for a clean, voice-reactive floating orb that stays out of your way while you work.</p>
-      </div>
-      <div class="card">
-        <h3>System Power & Media</h3>
-        <p>Clean Recycle Bin, control YouTube playback, adjust system volume, and lock or shut down your PC hands-free.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="free">
-    <div class="sec-head">
-      <small>NO SUBSCRIPTIONS - NO PAYWALLS</small>
-      <h2>Own the full experience for Free.</h2>
-      <p>Unlike other AI desktop apps that charge $56+ or monthly fees, J.A.R.V.I.S Command Center v5.0 is 100% free forever.</p>
-    </div>
-
-    <div class="free-box">
-      <span class="tag" style="border-color:#10b981; color:#10b981;">FREE LIFETIME EDITION - v5.0</span>
-      <h3 style="font-family:'Orbitron',sans-serif; font-size:22px; color:#00e5ff;">J.A.R.V.I.S Full Command Center</h3>
-      <div class="free-price">$0 <span>/ forever free</span></div>
-      <p style="color:#8ab0c7; font-size:14px;">Connect your own free Google AI Studio (Gemini) API key on first launch—zero limits from us.</p>
-
-      <div class="list-2col">
-        <div><b>+</b> Standalone Windows 10/11 EXE (v5.0)</div>
-        <div><b>+</b> Dual Male & Female Voices</div>
-        <div><b>+</b> Autonomous Desktop Coding</div>
-        <div><b>+</b> Live Optical Screen Vision</div>
-        <div><b>+</b> OpenCV Face & PIN Security</div>
-        <div><b>+</b> Floating Orb & Focus Mode</div>
-        <div><b>+</b> PDF & Word Summarizer</div>
-        <div><b>+</b> 100% Local Data Privacy</div>
-      </div>
-
-      <a href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v5.0/JARVIS_Command_Center.exe" download class="btn-large" style="display:block;">Download JARVIS_Command_Center.exe v5.0 (Free)</a>
-    </div>
-  </div>
-
-  <div class="section" id="faq">
-    <div class="sec-head">
-      <small>SUPPORT & SETUP</small>
-      <h2>Frequently Asked Questions</h2>
-    </div>
-
-    <div class="faq-box">
-      <div class="faq">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">1. Is J.A.R.V.I.S Command Center v5.0 really 100% free? <span>+</span></button>
-        <div class="faq-a">Yes! Every feature in v5.0 is unlocked for free. Simply enter your free Google Gemini API key from Google AI Studio when you open the app for the first time.</div>
-      </div>
-      <div class="faq">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">2. Do I need Python installed on my PC? <span>+</span></button>
-        <div class="faq-a">No. JARVIS_Command_Center.exe is a complete standalone Windows program. Just download and double-click to run.</div>
-      </div>
-      <div class="faq">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">3. What is the default PIN for the Security Gate? <span>+</span></button>
-        <div class="faq-a">The default PIN is 1234. Inside Settings, you can register your face via webcam for automatic biometric login and set your own custom PIN.</div>
-      </div>
-      <div class="faq">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">4. How do I bypass the Windows SmartScreen prompt? <span>+</span></button>
-        <div class="faq-a">Because this is an independent free release, Windows Defender SmartScreen may show an "Unrecognized app" popup on first run. Click "More info" and then "Run anyway" to launch safely.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="foot-cols">
-      <div>
-        <div class="brand" style="margin-bottom:10px;">J.A.R.V.I.S <small>COMMAND CENTER v5.0</small></div>
-        <p style="color:#8ab0c7; font-size:13px; max-width:300px;">Next-generation autonomous AI assistant for Windows 10 & 11. Engineered, crafted, and operated by Liger.</p>
-      </div>
-      <div>
-        <h4>PRODUCT</h4>
-        <a href="#core">Neural Core</a>
-        <a href="#ptt">Push-to-Talk</a>
-        <a href="#features">Capabilities</a>
-        <a href="#free">Free Edition</a>
-      </div>
-      <div>
-        <h4>FEATURES</h4>
-        <a href="#features">Screen Vision</a>
-        <a href="#core">Auto-Coding Agent</a>
-        <a href="#core">Biometric Face Lock</a>
-        <a href="#features">PDF Reader</a>
-      </div>
-      <div>
-        <h4>DOWNLOAD</h4>
-        <a href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v5.0/JARVIS_Command_Center.exe" download>Windows v5.0 (.exe)</a>
-        <a href="#faq">Quick Start & FAQ</a>
-        <a href="https://github.com/tayyabofficial205-cell/jarvis-liger" target="_blank">GitHub Releases</a>
-      </div>
-    </div>
-    <div class="foot-end">
-      <div>2026 J.A.R.V.I.S Command Center v5.0 - Crafted & Operated by <strong style="color:#00e5ff;">Liger</strong></div>
-      <div style="color:#10b981;">Crafted for Windows 10 & 11 - All Systems Operational</div>
-    </div>
-  </div>
+  <footer>
+    J.A.R.V.I.S Command Center v6.0 · Crafted & Operated by <strong>Liger</strong> · Version 7.0 Coming Soon
+  </footer>
 
   <script>
-    function setMode(mode, btn) {
-      var btns = document.querySelectorAll('.mode-btn');
-      for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
-      btn.classList.add('active');
-      var label = document.getElementById('orb-label');
-      var info = document.getElementById('orb-info');
-      if (mode === 'memory') {
-        label.innerText = 'MEMORY: ON';
-        info.innerText = 'Remembers your name, preferences, and project history locally.';
-      } else if (mode === 'coding') {
-        label.innerText = 'AGENT: READY';
-        info.innerText = 'Writes and executes Python scripts & web apps directly on your Desktop.';
-      } else if (mode === 'vision') {
-        label.innerText = 'VISION: LIVE';
-        info.innerText = 'Scans your active monitor window to debug code and answer questions.';
-      } else if (mode === 'lock') {
-        label.innerText = 'GATE: ARMED';
-        info.innerText = 'OpenCV webcam facial recognition + 4-digit PIN security lock.';
-      }
-    }
-    function pttOn() {
-      document.getElementById('ptt-text').innerText = 'Listening... "Jarvis, open YouTube and check system status."';
-    }
-    function pttOff() {
-      document.getElementById('ptt-text').innerText = 'JARVIS: "Opening YouTube now. All systems are running optimally."';
+    function startDirectDownload() {
+      document.getElementById('dl-status').style.display = 'block';
+      const a = document.createElement('a');
+      a.href = "https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/v4.0/JARVIS_Command_Center_v6.exe";
+      a.download = "JARVIS_Command_Center_v6.exe";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
   </script>
 
