@@ -93,7 +93,7 @@ footer{border-top:1px solid var(--ln);padding:44px 20px 95px;text-align:center;c
     </div>
     <div class="nav-btns">
       <a class="btn btn-ghost" href="#features">Explore</a>
-      <a class="btn btn-white" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">Get Started →</a>
+      <a class="btn btn-white" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">Get Started →</a>
     </div>
   </nav>
 </div>
@@ -107,7 +107,7 @@ footer{border-top:1px solid var(--ln);padding:44px 20px 95px;text-align:center;c
   <p class="hero-sub">It talks. It remembers you. It helps around your PC, sees your screen, writes &amp; tests code, and upgrades itself in 1 click — in English, Urdu &amp; Hindi.</p>
   <div class="hero-cta">
     <a class="btn btn-ghost btn-lg" href="#dashboard">See Live Dashboard →</a>
-    <a class="btn btn-white btn-lg" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">Download Now ⬇</a>
+    <a class="btn btn-white btn-lg" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">Download Now ⬇</a>
   </div>
   <div class="hero-meta">
     <span>Windows 10 / 11 (64-bit)</span>
@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--ln);padding:44px 20px 95px;text-align:center;c
     <div class="eyebrow" style="margin-bottom:6px">LIVE COMMAND CENTER v10.0</div>
     <h3 style="text-align:center;font-size:1.5rem;margin-bottom:8px;color:#fff">Inside Your J.A.R.V.I.S Desktop Dashboard</h3>
     <p style="text-align:center;color:var(--mu);font-size:.94rem;margin-bottom:18px">Real-time CPU, RAM &amp; Disk telemetry, 10 active sub-agents, Pending Approvals safety gate, and 1-Click Software &amp; Updates. Click image to zoom.</p>
-    <img class="cockpit-img" src="https://vercel.app" alt="J.A.R.V.I.S Command Center v10.0 Live Dashboard" onclick="document.getElementById('lb').classList.add('open')" />
+    <img class="cockpit-img" src="./dashboard.jpg" alt="J.A.R.V.I.S Command Center v10.0 Live Dashboard" onclick="document.getElementById('lb').classList.add('open')" />
   </div>
 </section>
 
@@ -185,7 +185,7 @@ footer{border-top:1px solid var(--ln);padding:44px 20px 95px;text-align:center;c
       <div class="ico">🖥</div>
       <h3>Windows 10 / 11 Desktop App</h3>
       <p style="margin-bottom:20px">Full holographic Command Center, 80+ autonomous tools, screen vision &amp; 1-click updates.</p>
-      <a class="btn btn-white btn-lg" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">⬇ Download for Windows</a>
+      <a class="btn btn-white btn-lg" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">⬇ Download for Windows</a>
     </div>
     <div class="card glass">
       <div class="ico">📱</div>
@@ -215,11 +215,11 @@ footer{border-top:1px solid var(--ln);padding:44px 20px 95px;text-align:center;c
 
 <div class="sticky">
   <span style="font-size:.86rem;font-weight:700">J.A.R.V.I.S AI v10.0 <span style="color:#94a3b8;font-weight:400">· Free for Windows &amp; iPhone</span></span>
-  <a class="btn btn-white" style="padding:8px 18px;font-size:.84rem" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">Download Now ⬇</a>
+  <a class="btn btn-white" style="padding:8px 18px;font-size:.84rem" href="https://github.com/tayyabofficial205-cell/jarvis-liger/releases/download/11.0/JARVIS_Command_Center_v10_0.exe" download onclick="showToast()">Download Now ⬇</a>
 </div>
 
 <div class="modal" id="lb" onclick="this.classList.remove('open')">
-  <img src="https://vercel.app" alt="JARVIS Command Center Full Size" />
+  <img src="./dashboard.jpg" alt="JARVIS Command Center Full Size" />
 </div>
 
 <script>
@@ -228,36 +228,30 @@ function rsz(){sw=sc.width=innerWidth;sh=sc.height=innerHeight;st=Array.from({le
 rsz();addEventListener('resize',rsz);
 (function animS(){sx.clearRect(0,0,sw,sh);for(const p of st){p.y-=p.v;if(p.y<0)p.y=sh;sx.fillStyle=`rgba(186,230,253,${0.25+0.5*Math.abs(Math.sin(Date.now()*0.001+p.a*6))})`;sx.beginPath();sx.arc(p.x,p.y,p.r,0,Math.PI*2);sx.fill()}requestAnimationFrame(animS)})();
 
-// VIRTUAL AI ASSISTANT HOLOGRAPHIC AVATAR
 const ac=document.getElementById('aiAvatar'),ax=ac.getContext('2d');let t=0;
 (function animAI(){
   t+=0.03;ax.clearRect(0,0,310,310);const cx=155,cy=150;
-  // Rotating Cyber Rings
   for(let i=0;i<3;i++){
     ax.save();ax.translate(cx,cy);ax.rotate(t*(i%2===0?1:-0.75)+i);
     ax.strokeStyle=i===0?'rgba(34,211,238,.7)':'rgba(45,212,191,.38)';
-    ax.lineWidth=i===0?2.5:1.5;ax.setLineDash([28,14,8,14]);
+    ax.lineWidth=i===0?2.5:1.5;ax.setLineDash([28,16]);
     ax.beginPath();ax.arc(0,0,124-i*14,0,Math.PI*2);ax.stroke();ax.restore();
   }
-  // Virtual AI Assistant Helmet / Neural Head
   ax.save();
   ax.strokeStyle='#22d3ee';ax.lineWidth=2;ax.fillStyle='rgba(8,32,54,.85)';
   ax.beginPath();
   ax.moveTo(cx,cy-66);ax.lineTo(cx-38,cy-42);ax.lineTo(cx-42,cy+4);ax.lineTo(cx-24,cy+36);
   ax.lineTo(cx,cy+46);ax.lineTo(cx+24,cy+36);ax.lineTo(cx+42,cy+4);ax.lineTo(cx+38,cy-42);
   ax.closePath();ax.fill();ax.stroke();
-  // Glowing AI Eyes
   ax.fillStyle='#e0f2fe';ax.shadowColor='#22d3ee';ax.shadowBlur=14;
   ax.beginPath();ax.moveTo(cx-28,cy-14);ax.lineTo(cx-8,cy-8);ax.lineTo(cx-10,cy-2);ax.lineTo(cx-26,cy-6);ax.closePath();ax.fill();
   ax.beginPath();ax.moveTo(cx+28,cy-14);ax.lineTo(cx+8,cy-8);ax.lineTo(cx+10,cy-2);ax.lineTo(cx+26,cy-6);ax.closePath();ax.fill();
   ax.shadowBlur=0;
-  // Arc Reactor Chest Core
   const pulse=10+3*Math.sin(t*3);
   ax.strokeStyle='#2dd4bf';ax.lineWidth=2;
   ax.beginPath();ax.arc(cx,cy+72,pulse+4,0,Math.PI*2);ax.stroke();
   ax.fillStyle='rgba(165,243,252,.9)';
   ax.beginPath();ax.arc(cx,cy+72,pulse-3,0,Math.PI*2);ax.fill();
-  // Voice Equalizer Wave Bars
   for(let b=-5;b<=5;b++){
     const h=6+10*Math.abs(Math.sin(t*4+b*0.7));
     ax.fillStyle=b%2===0?'#22d3ee':'#2dd4bf';
